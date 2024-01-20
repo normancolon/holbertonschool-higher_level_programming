@@ -1,2 +1,3 @@
 #!/usr/bin/python3
-print("".join(chr(char_code) for char_code in range(97, 123)), end="")
+print("".join(chr(i) for i in range(97, 123)), end="")
+
