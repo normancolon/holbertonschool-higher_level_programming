@@ -1,2 +1,2 @@
 #!/usr/bin/python3
-print(", ".join(f"{num:02}" for num in range(100)))
+print(", ".join(f"{number:02d}" for number in range(100)))

@@ -1,3 +1,3 @@
 #!/usr/bin/python3
-def islower(character):
-    return 97 <= ord(character) <= 122
+def check_lowercase(char):
+    return ord(char) >= 97 and ord(char) <= 122

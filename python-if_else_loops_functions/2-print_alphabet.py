@@ -1,2 +1,2 @@
 #!/usr/bin/python3
-print("".join(chr(letter) for letter in range(ord('a'), ord('z')+1)), end="")
+print("".join(chr(char_code) for char_code in range(97, 123)), end="")
