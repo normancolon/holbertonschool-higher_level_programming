@@ -1,3 +1,6 @@
 #!/usr/bin/python3
-def exp(x, y):
-    return x ** y
+
+def pow(a, b):
+    """Compute a to the power of b and return the value."""
+    return a ** b
+

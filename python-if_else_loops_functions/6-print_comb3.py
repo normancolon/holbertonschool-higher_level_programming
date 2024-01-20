@@ -1,2 +1,10 @@
 #!/usr/bin/python3
-print(", ".join(f"{digit1}{digit2}" for digit1 in range(10) for digit2 in range(digit1 + 1, 10)))
+# First loop for the first digit
+for first_digit in range(0, 9):
+    # Second loop for the second digit
+    for second_digit in range(first_digit + 1, 10):
+        if first_digit < second_digit:
+            if first_digit != 8 or second_digit != 9:
+                print(f"{first_digit}{second_digit}", end=", ")
+            else:
+                print(f"{first_digit}{second_digit}")

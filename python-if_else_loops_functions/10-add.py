@@ -1,3 +1,5 @@
 #!/usr/bin/python3
-def sum(x, y):
-    return x + y
+def add(a, b):
+    """Add two integers and return the result."""
+    return a + b
+
