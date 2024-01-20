@@ -1,2 +1,2 @@
-#!/usr/bin/python3
-print("".join(chr(i) for i in range(97, 123)), end="")
+# This script prints the lowercase alphabet
+print("".join(chr(letter) for letter in range(ord('a'), ord('z')+1)), end="")

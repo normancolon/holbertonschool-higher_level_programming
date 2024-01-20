@@ -1,2 +1,3 @@
-def islower(c):
-    return ord(c) >= 97 and ord(c) <= 122
+# Function to check for lowercase character
+def islower(character):
+    return 97 <= ord(character) <= 122
