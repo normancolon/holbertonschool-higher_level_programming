@@ -1,4 +1,4 @@
-# This script prints the last digit of a number and its characteristics
+#!/usr/bin/python3
 import random
 num = random.randint(-10000, 10000)
 last_digit = num % 10 if num >= 0 else (-num % 10) * -1

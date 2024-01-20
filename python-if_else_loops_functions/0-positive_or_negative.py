@@ -1,4 +1,4 @@
-# This script determines if a number is positive, negative, or zero
+#!/usr/bin/python3
 import random
 num = random.randint(-10, 10)
 if num > 0:

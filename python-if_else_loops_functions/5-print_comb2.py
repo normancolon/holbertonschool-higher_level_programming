@@ -1,2 +1,2 @@
-# This script prints numbers from 0 to 99 in a formatted way
+#!/usr/bin/python3
 print(", ".join(f"{num:02}" for num in range(100)))

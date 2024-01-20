@@ -1,3 +1,3 @@
-# Function to add two integers
+#!/usr/bin/python3
 def add(a, b):
     return a + b
