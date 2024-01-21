@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-for io in range(0, 90):
-    if io % 10 > io / 10:
-        if io != 89:
-            print("{:02d}, ".format(i), end='')
+for io in range(0, 10):
+    for j in range(io + 1, 10):
+        if io == 8 and j == 9:
+            print("{}{}".format(io, j))
         else:
-            print("{:02d}".format(i))
+            print("{}{}".format(io, j), end=', ')
