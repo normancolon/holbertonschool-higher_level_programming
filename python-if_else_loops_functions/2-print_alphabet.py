@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
-# Looping through the lowercase alphabet using character conversion
-for letter in (chr(x) for x in range(ord('a'), ord('z') + 1)):
-    print(letter, end='')
+for cs in range(97, 123):
+    cs = chr(cs)
+    print("{}".format(cs), end='')
