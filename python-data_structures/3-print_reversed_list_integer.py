@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 
-def print_reversed_list_integer(my_list=[]):
-    for i in reversed(my_list):
-        print("{}".format(i))
+def print_reversed_list_integer(ls=[]):
 
-if __name__ == "__main__":
-    my_list = [1, 2, 3, 4, 5]
-    print_reversed_list_integer(my_list)
+    if ls:
 
+        # point i to the last element
+        i = len(ls) - 1
+
+        while i >= 0:
+            print("{:d}".format(ls[i]))
+            i -= 1
