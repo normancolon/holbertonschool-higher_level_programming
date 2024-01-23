@@ -1,11 +1,16 @@
 #!/usr/bin/python3
+
 from calculator_1 import add, sub, mul, div
 
+def main():
+    num1 = 10
+    num2 = 5
+
+    print(f'{num1} + {num2} = {add(num1, num2)}')
+    print(f'{num1} - {num2} = {sub(num1, num2)}')
+    print(f'{num1} * {num2} = {mul(num1, num2)}')
+    print(f'{num1} / {num2} = {div(num1, num2)}')
+
 if __name__ == "__main__":
-    x = 10
-    y = 5
-    print("{:d} + {:d} = {:d}".format(x, y, add(x, y)))
-    print("{:d} - {:d} = {:d}".format(x, y, sub(x, y)))
-    print("{:d} * {:d} = {:d}".format(x, y, mul(x, y)))
-    print("{:d} / {:d} = {:d}".format(x, y, div(x, y)))
+    main()
 
