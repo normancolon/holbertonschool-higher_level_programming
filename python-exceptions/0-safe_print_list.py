@@ -11,15 +11,20 @@ def safe_print_list(my_list=[], x=0):
     print()  # Ensures a new line at the end
     return count
 
-# Test the function with the provided example
+# Test the function with different scenarios
 if __name__ == "__main__":
     safe_print_list = __import__('0-safe_print_list').safe_print_list
 
-    my_list = [1, 2, 3, 4, 5]
+    # Test cases as per your requirement
+    test_cases = [
+        ([1, 2, 3, 4], len([1, 2, 3, 4])),
+        ([1, 2, 3, 4], len([1, 2, 3, 4]) - 2),
+        ([1, 2, 3, 4], 0),
+        ([], 0),
+        ([1, 2, 3, 4], len([1, 2, 3, 4]) + 1),
+        ([1, 2, 3, 4], len([1, 2, 3, 4]) + 10)
+    ]
 
-    nb_print = safe_print_list(my_list, 2)
-    print("nb_print: {:d}".format(nb_print))
-    nb_print = safe_print_list(my_list, len(my_list))
-    print("nb_print: {:d}".format(nb_print))
-    nb_print = safe_print_list(my_list, len(my_list) + 2)
-    print("nb_print: {:d}".format(nb_print))
+    for my_list, x in test_cases:
+        nb_print = safe_print_list(my_list, x)
+        print("nb_print: {:d}".format(nb_print))
