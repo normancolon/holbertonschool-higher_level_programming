@@ -8,4 +8,3 @@ if __name__ == "__main__":
     new_list = multiply_list_map(my_list, 4)
     print(new_list)
     print(my_list)
-

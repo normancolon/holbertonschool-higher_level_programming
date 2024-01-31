@@ -22,4 +22,3 @@ if __name__ == "__main__":
     print_sorted_dictionary(a_dictionary)
     print("--")
     print_sorted_dictionary(new_dict)
-
