@@ -1,5 +1,11 @@
 #!/usr/bin/python3
+"""
+Module 6-square
+Defines class Square with private instance attribute size, property and property setter for size, and method to print square with coordinates
+"""
+
 class Square:
+    """Class Square with method to print square with coordinates"""
     def __init__(self, size=0, position=(0, 0)):
         self.size = size
         self.position = position
@@ -26,18 +32,4 @@ class Square:
             len(value) != 2 or
             not all(isinstance(num, int) for num in value) or
             not all(num >= 0 for num in value)):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        self.__position = value
-
-    def area(self):
-        return self.__size ** 2
-
-    def my_print(self):
-        if self.__size == 0:
-            print()
-            return
-        for _ in range(self.__position[1]):
-            print()
-        for _ in range(self.__size):
-            print(" " * self.__position[0] + "#" * self.__size)
-
+            raise TypeError("position must be a tuple of 2

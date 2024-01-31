@@ -1,5 +1,11 @@
 #!/usr/bin/python3
+"""
+Module 4-square
+Defines class Square with private instance attribute size and property and property setter for size
+"""
+
 class Square:
+    """Class Square with getter and setter for size"""
     def __init__(self, size=0):
         self.size = size
 

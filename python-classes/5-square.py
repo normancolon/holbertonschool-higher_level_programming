@@ -1,5 +1,11 @@
 #!/usr/bin/python3
+"""
+Module 5-square
+Defines class Square with private instance attribute size, property and property setter for size, and method to print square
+"""
+
 class Square:
+    """Class Square with method to print square"""
     def __init__(self, size=0):
         self.size = size
 
