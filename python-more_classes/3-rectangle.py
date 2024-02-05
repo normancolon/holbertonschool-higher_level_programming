@@ -1,9 +1,11 @@
 #!/usr/bin/python3
+"""
+A module that defines a Rectangle class.
+"""
 
 class Rectangle:
     """
-    A class that defines a rectangle by its width and height,
-    and can calculate its area and perimeter, and provide a string representation.
+    A class that defines a rectangle by its width and height.
     """
 
     def __init__(self, width=0, height=0):
@@ -13,12 +15,12 @@ class Rectangle:
 
     @property
     def width(self):
-        """Get the width of the rectangle."""
+        """Get the width of the Rectangle."""
         return self.__width
 
     @width.setter
     def width(self, value):
-        """Set the width of the rectangle."""
+        """Set the width of the Rectangle."""
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value < 0:
@@ -27,12 +29,12 @@ class Rectangle:
 
     @property
     def height(self):
-        """Get the height of the rectangle."""
+        """Get the height of the Rectangle."""
         return self.__height
 
     @height.setter
     def height(self, value):
-        """Set the height of the rectangle."""
+        """Set the height of the Rectangle."""
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
@@ -48,10 +50,9 @@ class Rectangle:
         if self.__width == 0 or self.__height == 0:
             return 0
         return 2 * (self.__width + self.__height)
-
-    def __str__(self):
-        """Return the printable representation of the Rectangle using the # character."""
+        
+   def __str__(self):
+        """Return the printable representation of the Rectangle."""
         if self.__width == 0 or self.__height == 0:
             return ""
-        rectangle_str = "\n".join(["#" * self.__width for _ in range(self.__height)])
-        return rectangle_str
+        return ("\n".join("#" * self.__width for _ in range(self.__height)))
