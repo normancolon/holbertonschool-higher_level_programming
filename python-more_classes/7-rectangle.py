@@ -8,8 +8,12 @@ class Rectangle:
     A class that defines a rectangle by its width and height.
     """
 
+    number_of_instances = 0  # Incremented/decremented in __init__ and __del__
+    print_symbol = "#"       # New class attribute for string representation
+
     def __init__(self, width=0, height=0):
         """Initialize a new Rectangle instance."""
+        Rectangle.number_of_instances += 1
         self.width = width
         self.height = height
 
@@ -50,23 +54,17 @@ class Rectangle:
         if self.__width == 0 or self.__height == 0:
             return 0
         return 2 * (self.__width + self.__height)
-        
+
     def __str__(self):
         """Return the printable representation of the Rectangle."""
         if self.__width == 0 or self.__height == 0:
             return ""
         symbol = str(self.print_symbol)
         return ("\n".join(symbol * self.__width for _ in range(self.__height)))
-        
-        def __repr__(self):
+
+    def __repr__(self):
         """Return a string representation of the Rectangle."""
         return "Rectangle({}, {})".format(self.__width, self.__height)
-        
-       def __init__(self, width=0, height=0):
-        """Initialize a new Rectangle instance."""
-        Rectangle.number_of_instances += 1
-        self.width = width
-        self.height = height
 
     def __del__(self):
         """Print a message when a Rectangle instance is deleted."""
