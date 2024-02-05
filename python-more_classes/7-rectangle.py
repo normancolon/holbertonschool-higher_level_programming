@@ -1,25 +1,27 @@
 #!/usr/bin/python3
 
 class Rectangle:
-    """A class Rectangle that defines a rectangle."""
+    """
+    A class that defines a rectangle and allows for a customizable string representation.
+    """
 
     number_of_instances = 0
-    print_symbol = "#"
+    print_symbol = "#"  # Public class attribute
 
     def __init__(self, width=0, height=0):
-        """Initialize the Rectangle instance."""
+        """Initialize a new Rectangle instance."""
         Rectangle.number_of_instances += 1
         self.width = width
         self.height = height
 
     @property
     def width(self):
-        """Retrieve the width of the Rectangle."""
+        """Get the width of the rectangle."""
         return self.__width
 
     @width.setter
     def width(self, value):
-        """Set the width of the Rectangle."""
+        """Set the width of the rectangle."""
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value < 0:
@@ -28,12 +30,12 @@ class Rectangle:
 
     @property
     def height(self):
-        """Retrieve the height of the Rectangle."""
+        """Get the height of the rectangle."""
         return self.__height
 
     @height.setter
     def height(self, value):
-        """Set the height of the Rectangle."""
+        """Set the height of the rectangle."""
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
@@ -51,7 +53,7 @@ class Rectangle:
         return 2 * (self.__width + self.__height)
 
     def __str__(self):
-        """Return the printable representation of the Rectangle using the print_symbol."""
+        """Return the printable representation of the Rectangle."""
         if self.__width == 0 or self.__height == 0:
             return ""
         symbol = str(self.print_symbol)
