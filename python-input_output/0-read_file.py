@@ -1,15 +1,15 @@
-#!/usr/bin/python3
-def read_file(filename=""):
-    """
-    Reads a text file (UTF-8) and prints it to stdout.
+#!/usr/bin/env python3
+"""Enhanced file reader module."""
 
-    Args:
-        filename (str): The name of the file to be read.
+def display_text_content(file_path=""):
     """
-    with open(filename, "r", encoding="utf-8") as f:
-        print(f.read(), end="")
-
-# This part below is not part of the function but demonstrates how to use it.
-# Assuming the existence of '0-main.py' as described and 'my_file_0.txt'
-if __name__ == "__main__":
-    read_file("my_file_0.txt")
+    This function opens and displays the content of a specified text file.
+    
+    """
+    try:
+        with open(file_path, mode='r', encoding='utf-8-sig') as file:
+            for content_line in file:
+                # Strip the newline character for consistent spacing.
+                print(content_line.rstrip('\n'))
+    except FileNotFoundError:
+        print(f"Error: The file '{file_path}' could not be found.")
