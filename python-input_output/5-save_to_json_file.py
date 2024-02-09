@@ -3,8 +3,9 @@
 """Defines a function for saving objects to files in JSON format."""
 import json
 
-def write_json_to_file(object_to_save, file_path):
-    """Saves a Python object to a file using its JSON string representation.
+def save_to_json_file(object_to_save, file_path):
+    """
+    Saves a Python object to a file using its JSON string representation.
 
     Parameters:
         object_to_save: The Python object to be saved.
