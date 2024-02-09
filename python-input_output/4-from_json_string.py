@@ -4,7 +4,8 @@
 import json
 
 def json_to_object(json_string):
-    """Converts a JSON string to a Python object.
+    """
+    Converts a JSON string to a Python object.
 
     Parameters:
         json_string (str): The JSON string to be converted.
@@ -12,4 +13,8 @@ def json_to_object(json_string):
     Returns:
         The Python object representation of the JSON string.
     """
-    return json.loads(json_string)
+    try:
+        return json.loads(json_string)
+    except json.JSONDecodeError as e:
+        print(f"Error decoding JSON: {e}")
+        return None
