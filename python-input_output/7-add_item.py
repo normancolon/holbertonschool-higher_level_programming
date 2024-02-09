@@ -23,4 +23,3 @@ if __name__ == "__main__":
 
     # Save the updated list back to the file
     json_saver(aggregated_list, target_file)
-
