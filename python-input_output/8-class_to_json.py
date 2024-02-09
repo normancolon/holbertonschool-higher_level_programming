@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 
-"""Defines a function to convert class instances to JSON-compatible dict."""
+"""Defines a function to serialize class instances to JSON-compatible dictionaries."""
 
-def instance_to_dict(instance):
-    """Converts a class instance into a dictionary representing its attributes.
+def class_to_json(instance):
+    """Serializes a class instance to a dictionary that is JSON-compatible.
 
-    Parameters:
-        instance: The instance of the class to be converted into a dict.
+    Args:
+        instance (object): An instance of a class.
 
     Returns:
-        dict: A dictionary containing all attributes of the instance.
+        dict: A dictionary representation of the instance suitable for JSON serialization.
     """
     return instance.__dict__
