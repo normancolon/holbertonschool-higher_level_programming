@@ -1,11 +1,16 @@
 #!/usr/bin/python3
-""" contains the number_of_lines function """
 
+"""Defines a function for writing to a file."""
 
-def number_of_lines(fname=""):
-    """ returns the number of lines in a file """
-    count = 0
-    with open(fname, encoding='utf-8') as f:
-        for line in f:
-            count += 1
-    return count
+def save_text_to_file(file_path="", content=""):
+    """Save a string to a UTF-8 encoded text file.
+
+    Parameters:
+        file_path (str): The path to the file where the content will be saved.
+        content (str): The content to save in the file.
+    
+    Returns:
+        int: The number of characters saved.
+    """
+    with open(file_path, "w", encoding="utf-8") as file:
+        return file.write(content)
