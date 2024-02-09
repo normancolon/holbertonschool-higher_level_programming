@@ -1,56 +1,43 @@
 #!/usr/bin/python3
 
-"""Defines a class Student with extended functionality."""
+"""Defines a class Learner for representing participants of online courses."""
 
-class Student:
-    """Represents a student with personal details and skills."""
+class Learner:
+    """Represents an individual enrolled in online courses."""
 
-    def __init__(self, first_name, last_name, age):
-        """Initialize a new Student with skills.
+    def __init__(self, first_name, last_name, age, enrolled_courses=None):
+        """Initializes a new Learner instance.
 
         Parameters:
-            first_name (str): The first name of the student.
-            last_name (str): The last name of the student.
-            age (int): The age of the student.
+            first_name (str): The learner's first name.
+            last_name (str): The learner's last name.
+            age (int): The learner's age.
+            enrolled_courses (list): A list of courses the learner is enrolled in.
         """
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
-        self.skills = []  # New attribute to maintain a list of skills
+        self.enrolled_courses = enrolled_courses if enrolled_courses is not None else []
 
-    def to_json(self, attrs=None):
-        """Get a selective or full dictionary representation of the Student.
-
-        Parameters:
-            attrs (list, optional): The specific attributes to include in the representation.
-        """
-        if isinstance(attrs, list) and all(isinstance(ele, str) for ele in attrs):
-            return {key: getattr(self, key) for key in attrs if hasattr(self, key)}
-        return self.__dict__
-
-    def reload_from_json(self, json):
-        """Update student attributes from a dictionary.
+    def add_course(self, course_name):
+        """Adds a new course to the learner's list of enrolled courses.
 
         Parameters:
-            json (dict): Attributes and values to update the student with.
+            course_name (str): The name of the course to add.
         """
-        for key, value in json.items():
-            setattr(self, key, value)
+        if course_name not in self.enrolled_courses:
+            self.enrolled_courses.append(course_name)
 
-    def add_skill(self, skill):
-        """Add a new skill to the student's skill set.
+    def profile_summary(self):
+        """Generates a summary of the learner's profile.
 
-        Parameters:
-            skill (str): A skill to add to the student.
+        Returns:
+            dict: A dictionary containing the learner's details and enrolled courses.
         """
-        if skill not in self.skills:
-            self.skills.append(skill)
+        return {
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "age": self.age,
+            "enrolled_courses": self.enrolled_courses
+        }
 
-    def remove_skill(self, skill):
-        """Remove a skill from the student's skill set, if it exists.
-
-        Parameters:
-            skill (str): The skill to remove.
-        """
-        if skill in self.skills:
-            self.skills.remove(skill)
