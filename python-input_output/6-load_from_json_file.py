@@ -3,7 +3,7 @@
 """Defines a function for loading objects from JSON files."""
 import json
 
-def read_object_from_json(file_path):
+def load_from_json_file(file_path):
     """Generates a Python object from a JSON file's content.
 
     Parameters:
