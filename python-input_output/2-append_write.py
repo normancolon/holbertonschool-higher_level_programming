@@ -2,7 +2,7 @@
 
 """Defines a function for appending text to a file."""
 
-def add_content_to_file(file_path="", content_to_add=""):
+def append_write(file_path="", content_to_add=""):
     """Appends a string to the end of a UTF-8 encoded text file.
 
     Parameters:
