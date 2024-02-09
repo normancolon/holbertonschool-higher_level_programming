@@ -2,13 +2,14 @@
 
 """Defines a function for writing to a file."""
 
-def save_text_to_file(file_path="", content=""):
-    """Save a string to a UTF-8 encoded text file.
+def write_file(file_path="", content=""):
+    """
+    Write a string to a UTF-8 encoded text file.
 
     Parameters:
         file_path (str): The path to the file where the content will be saved.
         content (str): The content to save in the file.
-    
+
     Returns:
         int: The number of characters saved.
     """

@@ -1,20 +1,17 @@
 #!/usr/bin/python3
 
-"""Defines a function for converting JSON strings to Python objects."""
+"""Module for deserializing JSON strings to Python objects."""
+
 import json
 
-def json_to_object(json_string):
+def from_json_string(my_str):
     """
     Converts a JSON string to a Python object.
 
-    Parameters:
-        json_string (str): The JSON string to be converted.
-    
+    Args:
+        my_str (str): JSON string to be deserialized.
+
     Returns:
-        The Python object representation of the JSON string.
+        The Python object represented by the JSON string.
     """
-    try:
-        return json.loads(json_string)
-    except json.JSONDecodeError as e:
-        print(f"Error decoding JSON: {e}")
-        return None
+    return json.loads(my_str)
