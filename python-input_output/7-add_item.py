@@ -1,36 +1,26 @@
 #!/usr/bin/python3
 
-"""Aggregates all command-line arguments into a list and stores it in a JSON file."""
+"""Aggregates command-line arguments into a list and saves to a JSON file."""
 import sys
-import importlib.util
-
-def main():
-    filename = "collected_args.json"
-
-    # Dynamically import 'save_to_json_file' function
-    save_module_name = '5-save_to_json_file'
-    save_module_spec = importlib.util.spec_from_file_location(save_module_name, f"./{save_module_name}.py")
-    save_module = importlib.util.module_from_spec(save_module_spec)
-    save_module_spec.loader.exec_module(save_module)
-
-    # Dynamically import 'load_from_json_file' function
-    load_module_name = '6-load_from_json_file'
-    load_module_spec = importlib.util.spec_from_file_location(load_module_name, f"./{load_module_name}.py")
-    load_module = importlib.util.module_from_spec(load_module_spec)
-    load_module_spec.loader.exec_module(load_module)
-
-    try:
-        # Attempt to load existing list from the file
-        items = load_module.load_from_json_file(filename)
-    except FileNotFoundError:
-        # Initialize an empty list if file does not exist
-        items = []
-
-    # Extend the list with command-line arguments (excluding the script name)
-    items.extend(sys.argv[1:])
-
-    # Save the updated list back to the file
-    save_module.save_to_json_file(items, filename)
 
 if __name__ == "__main__":
-    main()
+    # Importing functions with aliases for clarity
+    json_saver = __import__('5-save_to_json_file').save_to_json_file
+    json_loader = __import__('6-load_from_json_file').load_from_json_file
+
+    # File to store the aggregated items
+    target_file = "add_item.json"
+
+    try:
+        # Attempt to load existing content from the file
+        aggregated_list = json_loader(target_file)
+    except FileNotFoundError:
+        # Initialize an empty list if the file does not exist
+        aggregated_list = []
+
+    # Extend the list with command-line arguments (excluding the script name)
+    aggregated_list.extend(sys.argv[1:])
+
+    # Save the updated list back to the file
+    json_saver(aggregated_list, target_file)
+
