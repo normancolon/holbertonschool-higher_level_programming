@@ -1,18 +1,16 @@
 #!/usr/bin/python3
-"""  the read_lines function """
 
+"""Defines a function for appending text to a file."""
 
-def read_lines(fname="", nb_lines=0):
-    """ reads a n lines of a text file and prints them   """
-    count = 0
-    with open(fname, encoding='utf-8') as f:
-        for line in f:
-            count += 1
-        f.seek(0)
-        if 0 < nb_lines < count:
-            for i in range(nb_lines):
-                print(f.readline(), end="")
-                i += 1
-        else:
-            for line in f:
-                print(line, end="")
+def add_content_to_file(file_path="", content_to_add=""):
+    """Appends a string to the end of a UTF-8 encoded text file.
+
+    Parameters:
+        file_path (str): The path to the file where content will be appended.
+        content_to_add (str): The text to be appended to the file.
+    
+    Returns:
+        int: The number of characters appended.
+    """
+    with open(file_path, "a", encoding="utf-8") as file:
+        return file.write(content_to_add)

@@ -1,15 +1,41 @@
 #!/usr/bin/python3
-""" contains the add_item function """
-from sys import argv
-save_to_json_file = __import__('7-save_to_json_file').save_to_json_file
-load_from_json_file = __import__('8-load_from_json_file').load_from_json_file
 
+"""Defines a class Learner for representing participants of online courses."""
 
-fname = "add_item.json"
-try:
-    my_list = load_from_json_file(fname)
-except:
-    my_list = []
-for arg in argv[1:]:
-    my_list.append(arg)
-save_to_json_file(my_list, fname)
+class Learner:
+    """Represents an individual enrolled in online courses."""
+
+    def __init__(self, first_name, last_name, age, enrolled_courses=None):
+        """Initializes a new Learner instance.
+
+        Parameters:
+            first_name (str): The learner's first name.
+            last_name (str): The learner's last name.
+            age (int): The learner's age.
+            enrolled_courses (list): A list of courses the learner is enrolled in.
+        """
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+        self.enrolled_courses = enrolled_courses if enrolled_courses is not None else []
+
+    def add_course(self, course_name):
+        """Adds a new course to the learner's list of enrolled courses.
+
+        Parameters:
+            course_name (str): The name of the course to add.
+        """
+        self.enrolled_courses.append(course_name)
+
+    def profile_summary(self):
+        """Generates a summary of the learner's profile.
+
+        Returns:
+            dict: A dictionary containing the learner's details and enrolled courses.
+        """
+        return {
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "age": self.age,
+            "enrolled_courses": self.enrolled_courses
+        }

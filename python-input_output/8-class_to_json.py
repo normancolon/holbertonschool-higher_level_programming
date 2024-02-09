@@ -1,9 +1,14 @@
 #!/usr/bin/python3
-""" contains the load_from_json_file function """
-import json
 
+"""Defines a function to convert class instances to JSON-compatible dict."""
 
-def load_from_json_file(fname):
-    """ creates an obj from a json file """
-    with open(fname, encoding='utf-8') as f:
-        return json.load(f)
+def instance_to_dict(instance):
+    """Converts a class instance into a dictionary representing its attributes.
+
+    Parameters:
+        instance: The instance of the class to be converted into a dict.
+
+    Returns:
+        dict: A dictionary containing all attributes of the instance.
+    """
+    return instance.__dict__

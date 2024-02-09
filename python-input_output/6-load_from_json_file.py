@@ -1,8 +1,16 @@
 #!/usr/bin/python3
-""" contains the from_json_string function """
+
+"""Defines a function for loading objects from JSON files."""
 import json
 
+def read_object_from_json(file_path):
+    """Generates a Python object from a JSON file's content.
 
-def from_json_string(my_str):
-    """ returns object represented by json string """
-    return json.loads(my_str)
+    Parameters:
+        file_path (str): The path to the JSON file to be read.
+    
+    Returns:
+        The Python object represented by the JSON file content.
+    """
+    with open(file_path, "r", encoding="utf-8") as file:
+        return json.load(file)
