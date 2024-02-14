@@ -1,114 +1,94 @@
 #!/usr/bin/python3
-""" Module containing the Rectangle class,
-derived from the Base class
-"""
+"""Defines a Rectangle class."""
 from models.base import Base
 
-class Quad(Base):
-    """ Quad class represents a rectangle """
+class Rectangle(Base):
+    """Represent a rectangle."""
 
-    def __init__(self, breadth, length, posX=0, posY=0, unique_id=None):
-        """ Initializes Quad instances """
-        self.breadth = breadth
-        self.length = length
-        self.posX = posX
-        self.posY = posY
-        super().__init__(unique_id)
-
-    @property
-    def breadth(self):
-        """ breadth property getter """
-        return self.__breadth
-
-    @breadth.setter
-    def breadth(self, val):
-        """ breadth property setter """
-        if type(val) is not int:
-            raise TypeError("breadth must be an integer")
-        if val <= 0:
-            raise ValueError("breadth must be > 0")
-        self.__breadth = val
+    def __init__(self, width, height, x=0, y=0, id=None):
+        """Initialize a new Rectangle."""
+        super().__init__(id)
+        self.width = width
+        self.height = height
+        self.x = x
+        self.y = y
 
     @property
-    def length(self):
-        """ length property getter """
-        return self.__length
+    def width(self):
+        """Get/set the width of the Rectangle."""
+        return self.__width
 
-    @length.setter
-    def length(self, val):
-        """ length property setter """
-        if type(val) is not int:
-            raise TypeError("length must be an integer")
-        if val <= 0:
-            raise ValueError("length must be > 0")
-        self.__length = val
-
-    @property
-    def posX(self):
-        """ posX property getter """
-        return self.__posX
-
-    @posX.setter
-    def posX(self, val):
-        """ posX property setter """
-        if type(val) is not int:
-            raise TypeError("posX must be an integer")
-        if val < 0:
-            raise ValueError("posX must be >= 0")
-        self.__posX = val
+    @width.setter
+    def width(self, value):
+        if type(value) != int:
+            raise TypeError("width must be an integer")
+        if value <= 0:
+            raise ValueError("width must be > 0")
+        self.__width = value
 
     @property
-    def posY(self):
-        """ posY property getter """
-        return self.__posY
+    def height(self):
+        """Get/set the height of the Rectangle."""
+        return self.__height
 
-    @posY.setter
-    def posY(self, val):
-        """ posY property setter """
-        if type(val) is not int:
-            raise TypeError("posY must be an integer")
-        if val < 0:
-            raise ValueError("posY must be >= 0")
-        self.__posY = val
+    @height.setter
+    def height(self, value):
+        if type(value) != int:
+            raise TypeError("height must be an integer")
+        if value <= 0:
+            raise ValueError("height must be > 0")
+        self.__height = value
 
-    def compute_area(self):
-        """ Returns the area of the Quad object """
-        return self.breadth * self.length
+    @property
+    def x(self):
+        """Get/set the x attribute of the Rectangle."""
+        return self.__x
 
-    def render(self):
-        """ Displays the Quad """
-        drawing = self.posY * "\n"
-        for i in range(self.length):
-            drawing += (" " * self.posX)
-            drawing += ("#" * self.breadth) + "\n"
+    @x.setter
+    def x(self, value):
+        if type(value) != int:
+            raise TypeError("x must be an integer")
+        if value < 0:
+            raise ValueError("x must be >= 0")
+        self.__x = value
 
-        print(drawing, end='')
+    @property
+    def y(self):
+        """Get/set the y attribute of the Rectangle."""
+        return self.__y
+
+    @y.setter
+    def y(self, value):
+        if type(value) != int:
+            raise TypeError("y must be an integer")
+        if value < 0:
+            raise ValueError("y must be >= 0")
+        self.__y = value
+
+    def area(self):
+        """Return the area of the Rectangle."""
+        return self.width * self.height
+
+    def display(self):
+        """Print the Rectangle using the `#` character."""
+        print("\n" * self.y + "\n".join(" " * self.x + "#" * self.width for _ in range(self.height)))
 
     def __str__(self):
-        """ String representation of Quad """
-        details = "[Quad] "
-        details_id = "({}) ".format(self.id)
-        details_pos = "{}/{} - ".format(self.posX, self.posY)
-        details_size = "{}/{}".format(self.breadth, self.length)
+        """Return the print() and str() representation of the Rectangle."""
+        return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
 
-        return details + details_id + details_pos + details_size
-
-    def refresh(self, *args, **kwargs):
-        """ Refreshes the Quad properties """
+    def update(self, *args, **kwargs):
+        """Update the Rectangle attributes."""
+        attributes = ["id", "width", "height", "x", "y"]
         if args and len(args) > 0:
-            attributes = ['id', 'breadth', 'length', 'posX', 'posY']
-            for idx, value in enumerate(args):
-                setattr(self, attributes[idx], value)
+            for i, arg in enumerate(args):
+                if i < len(attributes):
+                    setattr(self, attributes[i], arg)
         else:
             for key, value in kwargs.items():
-                setattr(self, key, value)
+                if key in attributes:
+                    setattr(self, key, value)
 
-    def to_map(self):
-        """ Converts Quad properties to a dictionary """
-        attributes = ['id', 'breadth', 'length', 'posX', 'posY']
-        result_dict = {}
-
-        for attr in attributes:
-            result_dict[attr] = getattr(self, attr)
-
-        return result_dict
+    def to_dictionary(self):
+        """Return the dictionary representation of a Rectangle."""
+        return {"id": self.id, "width": self.width, "height": self.height, "x": self.x, "y": self.y}
