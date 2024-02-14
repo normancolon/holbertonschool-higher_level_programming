@@ -1,36 +1,72 @@
 #!/usr/bin/python3
-"""Module for Square class."""
-from models.rectangle import Rectangle
+""" Module that contains class Cube,
+inheritance of class Quad
+"""
+from models.quad import Quad
 
-class Square(Rectangle):
-    """A square class that inherits from Rectangle."""
-    
-    def __init__(self, size, x=0, y=0, id=None):
-        """Initialize a new Square."""
-        super().__init__(size, size, x, y, id)
+class Cube(Quad):
+    """ Class Cube inherits from Quad """
 
-    @property
-    def size(self):
-        """Get the size of the Square."""
-        return self.width
-
-    @size.setter
-    def size(self, value):
-        """Set the size of the Square."""
-        self.width = value
-        self.height = value
+    def __init__(self, edge, posX=0, posY=0, unique_id=None):
+        """ Initializes Cube instances """
+        super().__init__(edge, edge, posX, posY, unique_id)
 
     def __str__(self):
-        """Return the string representation of the Square."""
-        return f"[Square] ({self.id}) {self.x}/{self.y} - {self.width}"
+        """ String representation method """
+        str_cube = "[Cube] "
+        str_unique_id = "({}) ".format(self.id)
+        str_position = "{}/{} - ".format(self.posX, self.posY)
+        str_dimension = "{}".format(self.breadth)
 
-    def update(self, *args, **kwargs):
-        """Update the Square attributes."""
+        return str_cube + str_unique_id + str_position + str_dimension
+
+    @property
+    def edge(self):
+        """ Edge property getter """
+        return self.breadth
+
+    @edge.setter
+    def edge(self, val):
+        """ Edge property setter """
+        self.breadth = val
+        self.length = val
+
+    def __str__(self):
+        """ String representation method, revised """
+        str_cube = "[Cube] "
+        str_unique_id = "({}) ".format(self.id)
+        str_position = "{}/{} - ".format(self.posX, self.posY)
+        str_edge = "{}".format(self.edge)
+
+        return str_cube + str_unique_id + str_position + str_edge
+
+    def refresh(self, *args, **kwargs):
+        """ Refresh Cube attributes """
         if args and len(args) > 0:
-            attrs = ['id', 'size', 'x', 'y']
-            for attr, value in zip(attrs, args):
-                setattr(self, attr, value)
+            attributes = ['id', 'edge', 'posX', 'posY']
+            for idx, value in enumerate(args):
+                if attributes[idx] == 'edge':
+                    self.breadth = value
+                    self.length = value
+                else:
+                    setattr(self, attributes[idx], value)
         else:
             for key, value in kwargs.items():
-                if hasattr(self, key):
+                if key == 'edge':
+                    self.breadth = value
+                    self.length = value
+                else:
                     setattr(self, key, value)
+
+    def to_map(self):
+        """ Converts Cube properties to a dictionary """
+        attributes = ['id', 'edge', 'posX', 'posY']
+        result_dict = {}
+
+        for attr in attributes:
+            if attr == 'edge':
+                result_dict[attr] = getattr(self, 'breadth')
+            else:
+                result_dict[attr] = getattr(self, attr)
+
+        return result_dict
