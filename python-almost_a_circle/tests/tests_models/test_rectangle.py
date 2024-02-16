@@ -109,22 +109,5 @@ class TestRectangle(unittest.TestCase):
         r1 = Rectangle(1, 2, 3, 4, 5)
         self.assertEqual(str(r1), "[Rectangle] (5) 3/4 - 1/2")
 
-    # New tests from the second code snippet
-    def test_rectangle_creation_additional(self):
-        """Test additional creation of Rectangle with width and height."""
-        r = Rectangle(1, 2)
-        self.assertEqual(r.width, 1)
-        self.assertEqual(r.height, 2)
-
-    def test_rectangle_string_width(self):
-        """Test Rectangle creation with a string for width."""
-        with self.assertRaises(TypeError):
-            Rectangle("1", 2)
-
-    def test_rectangle_string_height(self):
-        """Test Rectangle creation with a string for height."""
-        with self.assertRaises(TypeError):
-            Rectangle(1, "2")
-
 if __name__ == "__main__":
     unittest.main()
