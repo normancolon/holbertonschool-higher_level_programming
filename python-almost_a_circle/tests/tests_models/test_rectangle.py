@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
@@ -110,4 +111,4 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(str(r1), "[Rectangle] (5) 3/4 - 1/2")
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main() 
