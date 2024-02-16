@@ -26,6 +26,11 @@ class TestBase(unittest.TestCase):
         """Test JSON string conversion with empty list."""
         self.assertEqual(Base.to_json_string([]), "[]")
 
+    def test_area(self):
+        """Test case for area method"""
+        r1 = Rectangle(1, 2)
+        self.assertEqual(r1.area(), 2)
+        
     def test_to_json_string_with_dict(self):
         """Test JSON string conversion with list of dictionaries."""
         dict_list = [{'id': 12}]
