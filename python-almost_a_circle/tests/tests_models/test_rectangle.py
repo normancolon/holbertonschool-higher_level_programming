@@ -134,6 +134,25 @@ class TestRectangle(unittest.TestCase):
         r1.update(width=1)
         self.assertEqual(r1.width, 1)
         # Continue for height, x, y as per the provided requirements
+    def test_rectangle_save_to_file_none(self):
+        """Test of Rectangle.save_to_file(None)"""
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
 
+    def test_rectangle_save_to_file_empty(self):
+        """Test of Rectangle.save_to_file([])"""
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_rectangle_save_to_file_single(self):
+        """Test of Rectangle.save_to_file([Rectangle(1, 2)])"""
+        rect = Rectangle(1, 2)
+        Rectangle.save_to_file([rect])
+        with open("Rectangle.json", "r") as file:
+            self.assertIn('"width": 1', file.read())
+            self.assertIn('"height": 2', file.read())
+            
 if __name__ == '__main__':
     unittest.main()
