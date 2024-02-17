@@ -55,6 +55,43 @@ class TestRectangle(unittest.TestCase):
         """Set up for test cases"""
         Base._Base__nb_objects = 0
 
+   def tearDown(self):
+        """Clean up files after tests"""
+        self.cleanup_files()
+
+    @staticmethod
+    def cleanup_files():
+        """Helper method to delete files created during tests"""
+        if os.path.exists("Rectangle.json"):
+            os.remove("Rectangle.json")
+        if os.path.exists("Square.json"):
+            os.remove("Square.json")
+        if os.path.exists("Base.json"):
+            os.remove("Base.json")
+
+    # Existing TestRectangle methods remain unchanged
+
+    def test_rectangle_save_to_file_none(self):
+        """Test of Rectangle.save_to_file(None)"""
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_rectangle_save_to_file_empty(self):
+        """Test of Rectangle.save_to_file([])"""
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_rectangle_save_to_file_single(self):
+        """Test of Rectangle.save_to_file([Rectangle(1, 2)])"""
+        rect = Rectangle(1, 2)
+        Rectangle.save_to_file([rect])
+        with open("Rectangle.json", "r") as file:
+            content = file.read()
+            self.assertIn('"width": 1', content)
+            self.assertIn('"height": 2', content)
+        
     def test_rectangle(self):
         """Test case for non-list arguments"""
         r1 = Rectangle(10, 2)
