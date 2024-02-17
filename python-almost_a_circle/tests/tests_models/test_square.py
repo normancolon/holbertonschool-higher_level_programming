@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 import unittest
+import os
 from models.square import Square
 from models.base import Base
-import os
 
 class TestSquare(unittest.TestCase):
 
@@ -13,6 +13,7 @@ class TestSquare(unittest.TestCase):
             os.remove("Square.json")
 
     def test_square_creation(self):
+        # Test for correct instantiation
         s1 = Square(5)
         self.assertEqual(s1.size, 5)
         self.assertEqual(s1.id, 1)
@@ -97,47 +98,64 @@ class TestSquare(unittest.TestCase):
         s5 = Square.create(**{'id': 89, 'size': 1, 'x': 2, 'y': 3})
         self.assertEqual(s5.y, 3)
 
-    def test_square_save_to_file(self):
+    def test_square_save_to_file_none(self):
         Square.save_to_file(None)
         with open("Square.json", "r") as file:
             self.assertEqual(file.read(), "[]")
 
+    def test_square_save_to_file_empty(self):
         Square.save_to_file([])
         with open("Square.json", "r") as file:
             self.assertEqual(file.read(), "[]")
 
-        # Test saving a list with one Square
+    def test_square_save_to_file_single(self):
         s1 = Square(1)
         Square.save_to_file([s1])
         with open("Square.json", "r") as file:
             content = file.read()
-            self.assertTrue(len(content) > 2)  # Checks if the file is not empty
+            self.assertIn('"size": 1', content)
+            self.assertIn('"id": 1', content)
 
-    def test_square_load_from_file(self):
-        # Test loading when file does not exist
+    def test_square_load_from_file_no_file(self):
+        if os.path.exists("Square.json"):
+            os.remove("Square.json")
         squares = Square.load_from_file()
         self.assertEqual(len(squares), 0)
 
-        # Test loading when file exists
+    def test_square_load_from_file_exists(self):
         s1 = Square(1)
         Square.save_to_file([s1])
         squares = Square.load_from_file()
         self.assertEqual(len(squares), 1)
         self.assertIsInstance(squares[0], Square)
+        self.assertEqual(squares[0].size, 1)
 
-    def test_square_errors(self):
+    # Error handling tests
+    def test_of_square_1_exists(self):
         with self.assertRaises(TypeError):
             Square("1")
+
+    def test_of_square_1_2_exists(self):
         with self.assertRaises(TypeError):
             Square(1, "2")
+
+    def test_of_square_1_2_3_exists(self):
         with self.assertRaises(TypeError):
             Square(1, 2, "3")
+
+    def test_of_square_negative_size(self):
         with self.assertRaises(ValueError):
             Square(-1)
+
+    def test_of_square_negative_x(self):
         with self.assertRaises(ValueError):
             Square(1, -2)
+
+    def test_of_square_negative_y(self):
         with self.assertRaises(ValueError):
             Square(1, 2, -3)
+
+    def test_of_square_zero_size(self):
         with self.assertRaises(ValueError):
             Square(0)
 
