@@ -2,7 +2,6 @@
 import unittest
 from unittest.mock import patch
 from io import StringIO
-import os
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
@@ -55,10 +54,6 @@ class TestRectangle(unittest.TestCase):
     def setUp(self):
         """Set up for test cases"""
         Base._Base__nb_objects = 0
-        try:
-            os.remove("Rectangle.json")
-        except FileNotFoundError:
-            pass
    
     def test_rectangle(self):
         """Test case for non-list arguments"""
@@ -117,7 +112,7 @@ class TestRectangle(unittest.TestCase):
         with patch('sys.stdout', new_callable=StringIO) as mocked_output:
             r1.display()
             self.assertEqual(mocked_output.getvalue(), expected_output)
-    
+
  # New test methods based on the additional requirements
     def test_to_dictionary(self):
         """Test of to_dictionary() in Rectangle exists"""
