@@ -24,22 +24,6 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s3.y, 3)
         self.assertEqual(s3.id, 89)
 
- # Additional tests based on new requirements
-    def test_square_with_string_argument(self):
-        """Test creation of a Square with a string argument."""
-        s1 = Square("1")
-        self.assertEqual(s1.size, 1)
-
-    def test_square_with_two_arguments_second_as_string(self):
-        """Test creation of a Square with second argument as a string."""
-        s2 = Square(1, "2")
-        self.assertEqual(s2.x, 2)
-
-    def test_square_with_three_arguments_third_as_string(self):
-        """Test creation of a Square with third argument as a string."""
-        s3 = Square(1, 2, "3")
-        self.assertEqual(s3.y, 3)
-
     def test_square_string_representation(self):
         """Test the string representation of a Square."""
         s1 = Square(4, 1, 2, 10)
@@ -78,6 +62,23 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s1.x, 4)
         self.assertEqual(s1.y, 2)
         self.assertTrue(isinstance(s1, Square))
+
+ # Additional tests based on new requirements
+    def test_square_with_string_argument(self):
+        """Test creation of a Square with a string argument."""
+        s1 = Square("1")
+        self.assertEqual(s1.size, 1)
+
+    def test_square_with_two_arguments_second_as_string(self):
+        """Test creation of a Square with second argument as a string."""
+        s2 = Square(1, "2")
+        self.assertEqual(s2.x, 2)
+
+    def test_square_with_three_arguments_third_as_string(self):
+        """Test creation of a Square with third argument as a string."""
+        s3 = Square(1, 2, "3")
+        self.assertEqual(s3.y, 3)
+
 
     def test_square_save_to_file_none(self):
         """Test saving to file with None."""
