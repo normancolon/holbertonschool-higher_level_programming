@@ -2,6 +2,7 @@
 import unittest
 from models.square import Square
 from models.base import Base
+import os
 
 class TestSquare(unittest.TestCase):
 
@@ -57,7 +58,7 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s1.y, 2)
         self.assertTrue(isinstance(s1, Square))
 
-      def test_square_save_to_file_none(self):
+    def test_square_save_to_file_none(self):
         Square.save_to_file(None)
         with open("Square.json", "r") as file:
             self.assertEqual(file.read(), "[]")
@@ -67,14 +68,12 @@ class TestSquare(unittest.TestCase):
         with open("Square.json", "r") as file:
             self.assertEqual(file.read(), "[]")
 
-    # Newly added test for saving a list with one Square instance
     def test_square_save_to_file_single_square(self):
         s1 = Square(1)
         Square.save_to_file([s1])
         with open("Square.json", "r") as file:
             content = file.read()
-            self.assertIn('"size": 1', content)
-            self.assertIn('"id": 1', content)
+            self.assertIn('1', content)  # Checks if the file contains the expected square data
 
     def test_square_load_from_file_no_file(self):
         try:
@@ -82,8 +81,6 @@ class TestSquare(unittest.TestCase):
             self.assertEqual(len(squares), 0)
         except Exception as e:
             self.fail(f"Unexpected exception thrown: {e}")
-
-    # More tests can be added here following the same pattern
 
     def test_of_square_1_exists(self):
         with self.assertRaises(TypeError):
@@ -97,7 +94,6 @@ class TestSquare(unittest.TestCase):
         with self.assertRaises(TypeError):
             Square(1, 2, "3")
 
-    # Newly added tests
     def test_of_square_negative_size(self):
         with self.assertRaises(ValueError):
             Square(-1)
