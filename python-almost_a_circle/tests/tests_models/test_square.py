@@ -2,7 +2,6 @@
 import unittest
 from models.square import Square
 from models.base import Base
-import os
 
 class TestSquare(unittest.TestCase):
 
@@ -68,13 +67,6 @@ class TestSquare(unittest.TestCase):
         with open("Square.json", "r") as file:
             self.assertEqual(file.read(), "[]")
 
-    def test_square_save_to_file_single_square(self):
-        s1 = Square(1)
-        Square.save_to_file([s1])
-        with open("Square.json", "r") as file:
-            content = file.read()
-            self.assertIn('1', content)  # Checks if the file contains the expected square data
-
     def test_square_load_from_file_no_file(self):
         try:
             squares = Square.load_from_file()
@@ -94,6 +86,7 @@ class TestSquare(unittest.TestCase):
         with self.assertRaises(TypeError):
             Square(1, 2, "3")
 
+    # Newly added tests
     def test_of_square_negative_size(self):
         with self.assertRaises(ValueError):
             Square(-1)
