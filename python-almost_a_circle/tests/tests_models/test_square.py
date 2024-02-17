@@ -83,7 +83,16 @@ class TestSquare(unittest.TestCase):
         except Exception as e:
             self.fail(f"Unexpected exception thrown: {e}")
 
-    # Additional tests for Square functionality...
+    # Additional tests based on new requirements
+    def test_square_with_string_argument_for_size(self):
+        """Test creation of a Square with a string argument for size."""
+        s1 = Square("1")
+        self.assertEqual(s1.size, 1, "Failed to convert 'size' from string to int")
+
+    def test_square_with_string_argument_for_x(self):
+        """Test creation of a Square with a string argument for x."""
+        s2 = Square(1, "2")
+        self.assertEqual(s2.x, 2, "Failed to convert 'x' from string to int")
 
 if __name__ == "__main__":
     unittest.main()
