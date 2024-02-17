@@ -96,7 +96,15 @@ class TestRectangle(unittest.TestCase):
         """Test case for __str__ method"""
         r1 = Rectangle(1, 2, 3, 4, 5)
         self.assertEqual(str(r1), "[Rectangle] (5) 3/4 - 1/2")
-        
+
+    def test_display(self):
+        """Test of display() exists"""
+        r1 = Rectangle(4, 2, 1, 1)
+        expected_output = "\n ####\n ####\n"
+        with patch('sys.stdout', new_callable=StringIO) as mocked_output:
+            r1.display()
+            self.assertEqual(mocked_output.getvalue(), expected_output)
+            
     def test_display_without_x_and_y(self):
         """Test case for display method without x and y"""
         r1 = Rectangle(3, 2)
@@ -104,7 +112,7 @@ class TestRectangle(unittest.TestCase):
         with patch('sys.stdout', new_callable=StringIO) as mocked_output:
             r1.display()
             self.assertEqual(mocked_output.getvalue(), expected_output)
-            
+
  # New test methods based on the additional requirements
     def test_to_dictionary(self):
         """Test of to_dictionary() in Rectangle exists"""
