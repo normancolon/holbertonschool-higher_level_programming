@@ -2,6 +2,7 @@
 import unittest
 from models.square import Square
 from models.base import Base
+from models.rectangle import Rectangle
 
 class TestSquare(unittest.TestCase):
 
@@ -83,7 +84,27 @@ class TestSquare(unittest.TestCase):
         except Exception as e:
             self.fail(f"Unexpected exception thrown: {e}")
 
-    # Additional tests for Square functionality...
+    # Adding tests for Rectangle.save_to_file
+    def test_save_to_file_none_rectangle(self):
+        """Test saving None to file for Rectangle."""
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
 
-if __name__ == "__main__":
+    def test_save_to_file_empty_list_rectangle(self):
+        """Test saving an empty list to file for Rectangle."""
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_save_to_file_single_rectangle(self):
+        """Test saving a list with one Rectangle instance to file."""
+        Rectangle.save_to_file([Rectangle(1, 2)])
+        with open("Rectangle.json", "r") as file:
+            content = file.read()
+            self.assertTrue(len(content) > 0)
+            self.assertTrue("Rectangle" in content)
+
+if __name__```python
+    "__main__":
     unittest.main()
