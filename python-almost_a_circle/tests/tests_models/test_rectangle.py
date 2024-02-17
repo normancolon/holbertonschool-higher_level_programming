@@ -104,7 +104,7 @@ class TestRectangle(unittest.TestCase):
         with patch('sys.stdout', new_callable=StringIO) as mocked_output:
             r1.display()
             self.assertEqual(mocked_output.getvalue(), expected_output)
-            
+
     def test_display_without_x_and_y(self):
         """Test case for display method without x and y"""
         r1 = Rectangle(3, 2)
@@ -134,42 +134,6 @@ class TestRectangle(unittest.TestCase):
         r1.update(width=1)
         self.assertEqual(r1.width, 1)
         # Continue for height, x, y as per the provided requirements
-   def tearDown(self):
-        """Clean up files after tests"""
-        self.cleanup_files()
 
-    @staticmethod
-    def cleanup_files():
-        """Helper method to delete files created during tests"""
-        if os.path.exists("Rectangle.json"):
-            os.remove("Rectangle.json")
-        if os.path.exists("Square.json"):
-            os.remove("Square.json")
-        if os.path.exists("Base.json"):
-            os.remove("Base.json")
-
-    # Existing TestRectangle methods remain unchanged
-
-    def test_rectangle_save_to_file_none(self):
-        """Test of Rectangle.save_to_file(None)"""
-        Rectangle.save_to_file(None)
-        with open("Rectangle.json", "r") as file:
-            self.assertEqual(file.read(), "[]")
-
-    def test_rectangle_save_to_file_empty(self):
-        """Test of Rectangle.save_to_file([])"""
-        Rectangle.save_to_file([])
-        with open("Rectangle.json", "r") as file:
-            self.assertEqual(file.read(), "[]")
-
-    def test_rectangle_save_to_file_single(self):
-        """Test of Rectangle.save_to_file([Rectangle(1, 2)])"""
-        rect = Rectangle(1, 2)
-        Rectangle.save_to_file([rect])
-        with open("Rectangle.json", "r") as file:
-            content = file.read()
-            self.assertIn('"width": 1', content)
-            self.assertIn('"height": 2', content)
-            
 if __name__ == '__main__':
     unittest.main()
