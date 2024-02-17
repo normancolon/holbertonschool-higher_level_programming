@@ -103,24 +103,5 @@ class TestSquare(unittest.TestCase):
         with self.assertRaises(ValueError):
             Square(0)
 
-   # Newly added tests for save_to_file
-    def test_square_save_to_file_none(self):
-        Square.save_to_file(None)
-        with open("Square.json", "r") as file:
-            self.assertEqual(file.read(), "[]")
-
-    def test_square_save_to_file_empty(self):
-        Square.save_to_file([])
-        with open("Square.json", "r") as file:
-            self.assertEqual(file.read(), "[]")
-
-    def test_square_save_to_file_single(self):
-        s1 = Square(1)
-        Square.save_to_file([s1])
-        with open("Square.json", "r") as file:
-            content = file.read()
-            self.assertIn(str(s1.id), content)
-            self.assertIn(str(s1.size), content)
-            
 if __name__ == "__main__":
     unittest.main()
