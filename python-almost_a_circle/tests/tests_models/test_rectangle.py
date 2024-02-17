@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
@@ -44,3 +45,16 @@ class TestBase(unittest.TestCase):
         json_str = '[{"id": 89}]'
         self.assertEqual(Base.from_json_string(json_str), [{"id": 89}])
 
+# New test class for Rectangle
+class TestRectangle(unittest.TestCase):
+    """Test cases for the Rectangle class."""
+
+    def test_area(self):
+        """Test case for area method"""
+        r1 = Rectangle(1, 2)
+        self.assertEqual(r1.area(), 2, "The area method did not return the correct result.")
+
+# Add more Rectangle tests here as needed
+
+if __name__ == '__main__':
+    unittest.main()
