@@ -104,6 +104,30 @@ class TestRectangle(unittest.TestCase):
         with patch('sys.stdout', new_callable=StringIO) as mocked_output:
             r1.display()
             self.assertEqual(mocked_output.getvalue(), expected_output)
+ # New test methods based on the additional requirements
+    def test_to_dictionary(self):
+        """Test of to_dictionary() in Rectangle exists"""
+        r1 = Rectangle(10, 7, 2, 1, 9)
+        self.assertEqual(r1.to_dictionary(), {'id': 9, 'width': 10, 'height': 7, 'x': 2, 'y': 1})
+
+    def test_update(self):
+        """Test of update() in Rectangle exists"""
+        r1 = Rectangle(10, 10, 10, 10, 10)
+        r1.update()
+        self.assertEqual(str(r1), '[Rectangle] (10) 10/10 - 10/10')
+
+    # Additional test_update methods for args
+    # Add your test_update methods here based on the provided requirements
+
+    # Test update with kwargs
+    def test_update_kwargs(self):
+        """Test of update with kwargs in Rectangle"""
+        r1 = Rectangle(5, 5, 5, 5, 5)
+        r1.update(id=89)
+        self.assertEqual(r1.id, 89)
+        r1.update(width=1)
+        self.assertEqual(r1.width, 1)
+        # Continue for height, x, y as per the provided requirements
 
 if __name__ == '__main__':
     unittest.main()
