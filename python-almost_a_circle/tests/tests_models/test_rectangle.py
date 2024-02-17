@@ -133,6 +133,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(r1.id, 89)
         r1.update(width=1)
         self.assertEqual(r1.width, 1)
-        
+        # Continue for height, x, y as per the provided requirements
+
 if __name__ == '__main__':
     unittest.main()
