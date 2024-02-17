@@ -2,6 +2,7 @@
 import unittest
 from unittest.mock import patch
 from io import StringIO
+import os
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
@@ -54,7 +55,11 @@ class TestRectangle(unittest.TestCase):
     def setUp(self):
         """Set up for test cases"""
         Base._Base__nb_objects = 0
-   
+        try:
+            os.remove("Rectangle.json")
+        except FileNotFoundError:
+            pass
+            
     def test_rectangle(self):
         """Test case for non-list arguments"""
         r1 = Rectangle(10, 2)
