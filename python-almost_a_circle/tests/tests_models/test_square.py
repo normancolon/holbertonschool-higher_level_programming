@@ -74,6 +74,20 @@ class TestSquare(unittest.TestCase):
         Square.save_to_file([])
         with open("Square.json", "r") as file:
             self.assertEqual(file.read(), "[]")
+    def test_square_with_string_size(self):
+    """Test Square creation with a string as the size."""
+    with self.assertRaises(TypeError):
+        Square("1")
+
+    def test_square_with_size_and_string_x(self):
+    """Test Square creation with a string as the x value."""
+    with self.assertRaises(TypeError):
+        Square(1, "2")
+
+    def test_square_with_all_string_arguments(self):
+    """Test Square creation with strings for size, x, and y."""
+    with self.assertRaises(TypeError):
+        Square(1, 2, "3")
 
     def test_square_load_from_file_no_file(self):
         """Test loading Squares from a file that doesn't exist."""
