@@ -117,7 +117,7 @@ class TestRectangle(unittest.TestCase):
         with patch('sys.stdout', new_callable=StringIO) as mocked_output:
             r1.display()
             self.assertEqual(mocked_output.getvalue(), expected_output)
-
+    
  # New test methods based on the additional requirements
     def test_to_dictionary(self):
         """Test of to_dictionary() in Rectangle exists"""
