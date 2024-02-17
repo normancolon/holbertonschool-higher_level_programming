@@ -1,14 +1,22 @@
 #!/usr/bin/python3
+"""Unittest for Base class"""
+
 import unittest
+import json
+import os
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
 
 class TestBase(unittest.TestCase):
+    """Test cases for Base class"""
+
+    def setUp(self):
+        """Set up for test cases"""
+        Base._Base__nb_objects = 0
 
     def test_auto_id(self):
         """Test automatic ID assignment."""
-        Base._Base__nb_objects = 0
         b1 = Base()
         b2 = Base()
         self.assertEqual(b1.id, 1)
@@ -44,4 +52,7 @@ class TestBase(unittest.TestCase):
         """Test loading from JSON string with valid JSON string."""
         json_str = '[{"id": 89}]'
         self.assertEqual(Base.from_json_string(json_str), [{"id": 89}])
+
+if __name__ == '__main__':
+    unittest.main()
 
