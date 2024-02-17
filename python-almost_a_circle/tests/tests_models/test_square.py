@@ -57,7 +57,7 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s1.y, 2)
         self.assertTrue(isinstance(s1, Square))
 
-    def test_square_save_to_file_none(self):
+      def test_square_save_to_file_none(self):
         Square.save_to_file(None)
         with open("Square.json", "r") as file:
             self.assertEqual(file.read(), "[]")
@@ -67,12 +67,23 @@ class TestSquare(unittest.TestCase):
         with open("Square.json", "r") as file:
             self.assertEqual(file.read(), "[]")
 
+    # Newly added test for saving a list with one Square instance
+    def test_square_save_to_file_single_square(self):
+        s1 = Square(1)
+        Square.save_to_file([s1])
+        with open("Square.json", "r") as file:
+            content = file.read()
+            self.assertIn('"size": 1', content)
+            self.assertIn('"id": 1', content)
+
     def test_square_load_from_file_no_file(self):
         try:
             squares = Square.load_from_file()
             self.assertEqual(len(squares), 0)
         except Exception as e:
             self.fail(f"Unexpected exception thrown: {e}")
+
+    # More tests can be added here following the same pattern
 
     def test_of_square_1_exists(self):
         with self.assertRaises(TypeError):
