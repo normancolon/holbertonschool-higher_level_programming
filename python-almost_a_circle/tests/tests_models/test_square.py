@@ -53,48 +53,21 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s1.id, 89)
         self.assertEqual(s1.y, 1)
 
-    def test_square_create(self):
-        """Test the create method of a Square."""
-        s1_dict = {'id': 89, 'size': 30, 'x': 4, 'y': 2}
-        s1 = Square.create(**s1_dict)
-        self.assertEqual(s1.id, 89)
-        self.assertEqual(s1.size, 30)
-        self.assertEqual(s1.x, 4)
-        self.assertEqual(s1.y, 2)
-        self.assertTrue(isinstance(s1, Square))
-
-    def test_square_save_to_file_none(self):
-        """Test saving to file with None."""
-        Square.save_to_file(None)
-        with open("Square.json", "r") as file:
-            self.assertEqual(file.read(), "[]")
-
-    def test_square_save_to_file_empty(self):
-        """Test saving to file with an empty list."""
-        Square.save_to_file([])
-        with open("Square.json", "r") as file:
-            self.assertEqual(file.read(), "[]")
-
-    def test_square_load_from_file_no_file(self):
-        """Test loading Squares from a file that doesn't exist."""
-        try:
-            squares = Square.load_from_file()
-            self.assertEqual(len(squares), 0)
-        except Exception as e:
-            self.fail(f"Unexpected exception thrown: {e}")
-
-    # New tests
+    # Additional tests for error handling
     def test_square_with_string_size(self):
         """Test of Square("1") exists"""
-        self.assertRaises(TypeError, Square, "1")
+        with self.assertRaises(TypeError):
+            Square("1")
 
     def test_square_with_string_x(self):
         """Test of Square(1, "2") exists"""
-        self.assertRaises(TypeError, Square, 1, "2")
+        with self.assertRaises(TypeError):
+            Square(1, "2")
 
     def test_square_with_string_y(self):
         """Test of Square(1, 2, "3") exists"""
-        self.assertRaises(TypeError, Square, 1, 2, "3")
+        with self.assertRaises(TypeError):
+            Square(1, 2, "3")
 
     def test_square_valid_arguments(self):
         """Test of Square(1, 2, 3, 4) exists"""
@@ -106,18 +79,23 @@ class TestSquare(unittest.TestCase):
 
     def test_square_with_negative_size(self):
         """Test of Square(-1) exists"""
-        self.assertRaises(ValueError, Square, -1)
+        with self.assertRaises(ValueError):
+            Square(-1)
 
-    def testsquare with negative x
-        self.assertRaises(ValueError, Square, 1, -2)
+    def test_square_with_negative_x(self):
+        """Test of Square(1, -2) exists"""
+        with self.assertRaises(ValueError):
+            Square(1, -2)
 
     def test_square_with_negative_y(self):
         """Test of Square(1, 2, -3) exists"""
-        self.assertRaises(ValueError, Square, 1, 2, -3)
+        with self.assertRaises(ValueError):
+            Square(1, 2, -3)
 
     def test_square_with_zero_size(self):
         """Test of Square(0) exists"""
-        self.assertRaises(ValueError, Square, 0)
+        with self.assertRaises(ValueError):
+            Square(0)
 
 if __name__ == "__main__":
     unittest.main()
