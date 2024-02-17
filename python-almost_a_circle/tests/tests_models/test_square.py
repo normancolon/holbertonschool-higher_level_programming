@@ -1,28 +1,60 @@
 #!/usr/bin/python3
+"""Unittest for Square"""
 import unittest
 from models.square import Square
+from models.rectangle import Rectangle
 from models.base import Base
 
+
 class TestSquare(unittest.TestCase):
+    """Define unittests for Square class."""
 
     def setUp(self):
         Base._Base__nb_objects = 0
 
-    def test_square_creation(self):
-        """Test the creation of a Square."""
-        s1 = Square(5)
-        self.assertEqual(s1.size, 5)
+    def test_00_id_incrementation(self):
+        s1 = Square(10)
         self.assertEqual(s1.id, 1)
+        s2 = Square(2, 0, 0, 12)
+        self.assertEqual(s2.id, 12)
+        s3 = Square(2, 0, 0)
+        self.assertEqual(s3.id, 2)
 
-        s2 = Square(3, 2)
-        self.assertEqual(s2.size, 3)
+    def test_01_attributes(self):
+        s1 = Square(10, 2)
+        self.assertEqual(s1.size, 10)
+        self.assertEqual(s1.x, 2)
+        s2 = Square(1, 2, 3, 4)
+        self.assertEqual(s2.size, 1)
         self.assertEqual(s2.x, 2)
-        self.assertEqual(s2.id, 2)
+        self.assertEqual(s2.y, 3)
+        self.assertEqual(s2.id, 4)
 
-        s3 = Square(4, 1, 3, 89)
-        self.assertEqual(s3.size, 4)
+    def test_02_validation(self):
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            Square("10", 2)
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            Square(-10, 2)
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            Square(10, "2")
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+            Square(10, 2, -3)
+
+    # Additional tests based on new requirements
+    def test_square_with_string_argument(self):
+        """Test creation of a Square with a string argument."""
+        s1 = Square("1")
+        self.assertEqual(s1.size, 1)
+
+    def test_square_with_two_arguments_second_as_string(self):
+        """Test creation of a Square with second argument as a string."""
+        s2 = Square(1, "2")
+        self.assertEqual(s2.x, 2)
+
+    def test_square_with_three_arguments_third_as_string(self):
+        """Test creation of a Square with third argument as a string."""
+        s3 = Square(1, 2, "3")
         self.assertEqual(s3.y, 3)
-        self.assertEqual(s3.id, 89)
 
     def test_square_string_representation(self):
         """Test the string representation of a Square."""
@@ -63,21 +95,6 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s1.y, 2)
         self.assertTrue(isinstance(s1, Square))
 
- # Additional tests based on new requirements
-    def test_square_with_string_argument(self):
-        """Test creation of a Square with a string argument."""
-        s1 = Square("1")
-        self.assertEqual(s1.size, 1)
-
-    def test_square_with_two_arguments_second_as_string(self):
-        """Test creation of a Square with second argument as a string."""
-        s2 = Square(1, "2")
-        self.assertEqual(s2.x, 2)
-
-    def test_square_with_three_arguments_third_as_string(self):
-        """Test creation of a Square with third argument as a string."""
-        s3 = Square(1, 2, "3")
-        self.assertEqual(s3.y, 3)
 
 
     def test_square_save_to_file_none(self):
