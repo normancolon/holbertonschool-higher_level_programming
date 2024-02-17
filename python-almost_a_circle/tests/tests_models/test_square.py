@@ -57,6 +57,23 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s1.y, 2)
         self.assertTrue(isinstance(s1, Square))
 
+    def test_square_save_to_file_none(self):
+        Square.save_to_file(None)
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_square_save_to_file_empty(self):
+        Square.save_to_file([])
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_square_load_from_file_no_file(self):
+        try:
+            squares = Square.load_from_file()
+            self.assertEqual(len(squares), 0)
+        except Exception as e:
+            self.fail(f"Unexpected exception thrown: {e}")
+
     def test_of_square_1_exists(self):
         with self.assertRaises(TypeError):
             Square("1")
@@ -69,6 +86,7 @@ class TestSquare(unittest.TestCase):
         with self.assertRaises(TypeError):
             Square(1, 2, "3")
 
+    # Newly added tests
     def test_of_square_negative_size(self):
         with self.assertRaises(ValueError):
             Square(-1)
@@ -85,7 +103,7 @@ class TestSquare(unittest.TestCase):
         with self.assertRaises(ValueError):
             Square(0)
 
-    # Newly added tests for save_to_file
+   # Newly added tests for save_to_file
     def test_square_save_to_file_none(self):
         Square.save_to_file(None)
         with open("Square.json", "r") as file:
@@ -103,7 +121,6 @@ class TestSquare(unittest.TestCase):
             content = file.read()
             self.assertIn(str(s1.id), content)
             self.assertIn(str(s1.size), content)
-
+            
 if __name__ == "__main__":
     unittest.main()
-
