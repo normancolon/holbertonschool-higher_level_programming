@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 import unittest
+from unittest.mock import patch
+from io import StringIO
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
@@ -94,6 +96,14 @@ class TestRectangle(unittest.TestCase):
         """Test case for __str__ method"""
         r1 = Rectangle(1, 2, 3, 4, 5)
         self.assertEqual(str(r1), "[Rectangle] (5) 3/4 - 1/2")
+        
+    def test_display_without_x_and_y(self):
+        """Test case for display method without x and y"""
+        r1 = Rectangle(3, 2)
+        expected_output = "###\n###\n"
+        with patch('sys.stdout', new_callable=StringIO) as mocked_output:
+            r1.display()
+            self.assertEqual(mocked_output.getvalue(), expected_output)
 
 if __name__ == '__main__':
     unittest.main()
