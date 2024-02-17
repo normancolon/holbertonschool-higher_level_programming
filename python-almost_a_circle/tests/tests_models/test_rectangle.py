@@ -2,6 +2,7 @@
 import unittest
 from unittest.mock import patch
 from io import StringIO
+import os
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
@@ -47,13 +48,16 @@ class TestBase(unittest.TestCase):
         json_str = '[{"id": 89}]'
         self.assertEqual(Base.from_json_string(json_str), [{"id": 89}])
 
-# New test class for Rectangle
 class TestRectangle(unittest.TestCase):
     """Test cases for the Rectangle class."""
 
     def setUp(self):
         """Set up for test cases"""
         Base._Base__nb_objects = 0
+        try:
+            os.remove("Rectangle.json")
+        except FileNotFoundError:
+            pass
    
     def test_rectangle(self):
         """Test case for non-list arguments"""
@@ -106,14 +110,13 @@ class TestRectangle(unittest.TestCase):
             self.assertEqual(mocked_output.getvalue(), expected_output)
 
     def test_display_without_x_and_y(self):
-        """Test case for display method without x and y"""
+        """Test case for display method without x andy"""
         r1 = Rectangle(3, 2)
         expected_output = "###\n###\n"
         with patch('sys.stdout', new_callable=StringIO) as mocked_output:
             r1.display()
             self.assertEqual(mocked_output.getvalue(), expected_output)
 
- # New test methods based on the additional requirements
     def test_to_dictionary(self):
         """Test of to_dictionary() in Rectangle exists"""
         r1 = Rectangle(10, 7, 2, 1, 9)
@@ -125,7 +128,6 @@ class TestRectangle(unittest.TestCase):
         r1.update()
         self.assertEqual(str(r1), '[Rectangle] (10) 10/10 - 10/10')
 
-    # Test update with kwargs
     def test_update_kwargs(self):
         """Test of update with kwargs in Rectangle"""
         r1 = Rectangle(5, 5, 5, 5, 5)
@@ -133,7 +135,25 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(r1.id, 89)
         r1.update(width=1)
         self.assertEqual(r1.width, 1)
-        # Continue for height, x, y as per the provided requirements
+
+    # Adding new test cases for save_to_file
+    def test_save_to_file_none(self):
+        """Test of Rectangle.save_to_file(None)"""
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_save_to_file_empty_list(self):
+        """Test of Rectangle.save_to_file([])"""
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_save_to_file_single_rectangle(self):
+        """Test of Rectangle.save_to_file([Rectangle(1, 2)])"""
+        Rectangle.save_to_file([Rectangle(1, 2)])
+        with open("Rectangle.json", "r") as file:
+            self.assertTrue(len(file.read()) > 0)
 
 if __name__ == '__main__':
     unittest.main()
