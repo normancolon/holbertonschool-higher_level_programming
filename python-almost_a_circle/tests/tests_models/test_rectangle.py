@@ -2,7 +2,6 @@
 import unittest
 from unittest.mock import patch
 from io import StringIO
-import os
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
