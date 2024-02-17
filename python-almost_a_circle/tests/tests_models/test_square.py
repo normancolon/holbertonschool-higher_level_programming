@@ -9,7 +9,6 @@ class TestSquare(unittest.TestCase):
         Base._Base__nb_objects = 0
 
     def test_square_creation(self):
-        """Test the creation of a Square."""
         s1 = Square(5)
         self.assertEqual(s1.size, 5)
         self.assertEqual(s1.id, 1)
@@ -24,6 +23,58 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s3.y, 3)
         self.assertEqual(s3.id, 89)
 
+    def test_square_string_representation(self):
+        s1 = Square(4, 1, 2, 10)
+        self.assertEqual(str(s1), "[Square] (10) 1/2 - 4")
+
+    def test_square_to_dictionary(self):
+        s1 = Square(10, 2, 1)
+        s1_dict = s1.to_dictionary()
+        expected = {'id': 1, 'size': 10, 'x': 2, 'y': 1}
+        self.assertEqual(s1_dict, expected)
+
+    def test_square_update_args(self):
+        s1 = Square(5, 0, 0, 1)
+        s1.update(89, 2, 3, 4)
+        self.assertEqual(s1.id, 89)
+        self.assertEqual(s1.size, 2)
+        self.assertEqual(s1.x, 3)
+        self.assertEqual(s1.y, 4)
+
+    def test_square_update_kwargs(self):
+        s1 = Square(5, 0, 0, 1)
+        s1.update(size=7, id=89, y=1)
+        self.assertEqual(s1.size, 7)
+        self.assertEqual(s1.id, 89)
+        self.assertEqual(s1.y, 1)
+
+    def test_square_create(self):
+        s1_dict = {'id': 89, 'size': 30, 'x': 4, 'y': 2}
+        s1 = Square.create(**s1_dict)
+        self.assertEqual(s1.id, 89)
+        self.assertEqual(s1.size, 30)
+        self.assertEqual(s1.x, 4)
+        self.assertEqual(s1.y, 2)
+        self.assertTrue(isinstance(s1, Square))
+
+    def test_square_save_to_file_none(self):
+        Square.save_to_file(None)
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_square_save_to_file_empty(self):
+        Square.save_to_file([])
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_square_load_from_file_no_file(self):
+        try:
+            squares = Square.load_from_file()
+            self.assertEqual(len(squares), 0)
+        except Exception as e:
+            self.fail(f"Unexpected exception thrown: {e}")
+
+    # Additional tests based on new requirements
     def test_square_with_string_argument(self):
         """Test creation of a Square with a string argument."""
         s1 = Square("1")
@@ -39,66 +90,7 @@ class TestSquare(unittest.TestCase):
         s3 = Square(1, 2, "3")
         self.assertEqual(s3.y, 3)
 
-    def test_square_string_representation(self):
-        """Test the string representation of a Square."""
-        s1 = Square(4, 1, 2, 10)
-        self.assertEqual(str(s1), "[Square] (10) 1/2 - 4")
-
-    def test_square_to_dictionary(self):
-        """Test converting a Square to a dictionary."""
-        s1 = Square(10, 2, 1)
-        s1_dict = s1.to_dictionary()
-        expected = {'id': 1, 'size': 10, 'x': 2, 'y': 1}
-        self.assertEqual(s1_dict, expected)
-
-    def test_square_update_args(self):
-        """Test updating Square properties using *args."""
-        s1 = Square(5, 0, 0, 1)
-        s1.update(89, 2, 3, 4)
-        self.assertEqual(s1.id, 89)
-        self.assertEqual(s1.size, 2)
-        self.assertEqual(s1.x, 3)
-        self.assertEqual(s1.y, 4)
-
-    def test_square_update_kwargs(self):
-        """Test updating Square properties using **kwargs."""
-        s1 = Square(5, 0, 0, 1)
-        s1.update(size=7, id=89, y=1)
-        self.assertEqual(s1.size, 7)
-        self.assertEqual(s1.id, 89)
-        self.assertEqual(s1.y, 1)
-
-    def test_square_create(self):
-        """Test the create method of a Square."""
-        s1_dict = {'id': 89, 'size': 30, 'x': 4, 'y': 2}
-        s1 = Square.create(**s1_dict)
-        self.assertEqual(s1.id, 89)
-        self.assertEqual(s1.size, 30)
-        self.assertEqual(s1.x, 4)
-        self.assertEqual(s1.y, 2)
-        self.assertTrue(isinstance(s1, Square))
-
-    def test_square_save_to_file_none(self):
-        """Test saving to file with None."""
-        Square.save_to_file(None)
-        with open("Square.json", "r") as file:
-            self.assertEqual(file.read(), "[]")
-
-    def test_square_save_to_file_empty(self):
-        """Test saving to file with an empty list."""
-        Square.save_to_file([])
-        with open("Square.json", "r") as file:
-            self.assertEqual(file.read(), "[]")
-
-    def test_square_load_from_file_no_file(self):
-        """Test loading Squares from a file that doesn't exist."""
-        try:
-            squares = Square.load_from_file()
-            self.assertEqual(len(squares), 0)
-        except Exception as e:
-            self.fail(f"Unexpected exception thrown: {e}")
-
-    # Additional tests for Square functionality...
+    # Other tests can continue from here...
 
 if __name__ == "__main__":
     unittest.main()
