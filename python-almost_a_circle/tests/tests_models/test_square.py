@@ -83,7 +83,21 @@ class TestSquare(unittest.TestCase):
         except Exception as e:
             self.fail(f"Unexpected exception thrown: {e}")
 
-    # Additional tests for Square functionality...
+    # Additional tests based on new requirements
+    def test_of_square_1_exists(self):
+        """Test of Square("1") exists"""
+        with self.assertRaises(TypeError):
+            Square("1")
+
+    def test_of_square_1_2_exists(self):
+        """Test of Square(1, "2") exists"""
+        with self.assertRaises(TypeError):
+            Square(1, "2")
+
+    def test_of_square_1_2_3_exists(self):
+        """Test of Square(1, 2, "3") exists"""
+        with self.assertRaises(TypeError):
+            Square(1, 2, "3")
 
 if __name__ == "__main__":
     unittest.main()
