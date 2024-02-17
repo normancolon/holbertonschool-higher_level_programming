@@ -104,6 +104,15 @@ class TestRectangle(unittest.TestCase):
         with patch('sys.stdout', new_callable=StringIO) as mocked_output:
             r1.display()
             self.assertEqual(mocked_output.getvalue(), expected_output)
+            
+   def test_display(self):
+        """Test of display() exists"""
+        r1 = Rectangle(2, 3)
+        expected_output = "##\\n##\\n##\\n"
+        with patch('sys.stdout', new=io.StringIO()) as fake_out:
+            r1.display()
+            self.assertEqual(fake_out.getvalue(), expected_output)
+
  # New test methods based on the additional requirements
     def test_to_dictionary(self):
         """Test of to_dictionary() in Rectangle exists"""
@@ -115,9 +124,6 @@ class TestRectangle(unittest.TestCase):
         r1 = Rectangle(10, 10, 10, 10, 10)
         r1.update()
         self.assertEqual(str(r1), '[Rectangle] (10) 10/10 - 10/10')
-
-    # Additional test_update methods for args
-    # Add your test_update methods here based on the provided requirements
 
     # Test update with kwargs
     def test_update_kwargs(self):
