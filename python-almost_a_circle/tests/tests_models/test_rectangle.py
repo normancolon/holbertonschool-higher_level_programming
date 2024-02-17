@@ -2,6 +2,7 @@
 import unittest
 from unittest.mock import patch
 from io import StringIO
+import os
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
@@ -54,7 +55,11 @@ class TestRectangle(unittest.TestCase):
     def setUp(self):
         """Set up for test cases"""
         Base._Base__nb_objects = 0
-
+         try:
+            os.remove("Rectangle.json")
+        except FileNotFoundError:
+            pass
+            
     def test_rectangle(self):
         """Test case for non-list arguments"""
         r1 = Rectangle(10, 2)
@@ -113,7 +118,27 @@ class TestRectangle(unittest.TestCase):
             r1.display()
             self.assertEqual(mocked_output.getvalue(), expected_output)
 
- # New test methods based on the additional requirements
+# Additional test methods for Rectangle.save_to_file
+    def test_rectangle_save_to_file_none(self):
+        """Test of Rectangle.save_to_file(None)"""
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_rectangle_save_to_file_empty(self):
+        """Test of Rectangle.save_to_file([])"""
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_rectangle_save_to_file_single(self):
+        """Test of Rectangle.save_to_file([Rectangle(1, 2)])"""
+        rect = Rectangle(1, 2)
+        Rectangle.save_to_file([rect])
+        with open("Rectangle.json", "r") as file:
+            self.assertIn('"width": 1', file.read())
+            self.assertIn('"height": 2', file.read())
+
     def test_to_dictionary(self):
         """Test of to_dictionary() in Rectangle exists"""
         r1 = Rectangle(10, 7, 2, 1, 9)
