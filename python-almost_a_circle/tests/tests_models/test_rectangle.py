@@ -2,6 +2,7 @@
 import unittest
 from unittest.mock import patch
 from io import StringIO
+import os
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
@@ -54,6 +55,10 @@ class TestRectangle(unittest.TestCase):
     def setUp(self):
         """Set up for test cases"""
         Base._Base__nb_objects = 0
+        try:
+            os.remove("Rectangle.json")
+        except FileNotFoundError:
+            pass
    
     def test_rectangle(self):
         """Test case for non-list arguments"""
@@ -68,6 +73,12 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(r3.x, 3)
         self.assertEqual(r3.y, 4)
 
+     def test_rectangle_save_to_file_none(self):
+        """Test of Rectangle.save_to_file(None) in Rectangle exists"""
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+            
     def test_rectangle_with_negative_arguments(self):
         """Test case for negative arguments"""
         self.assertRaises(ValueError, Rectangle, 10, -2)
