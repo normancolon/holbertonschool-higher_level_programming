@@ -1,5 +1,10 @@
--- Script that creates an user in MySQL server
--- Query to create the user 'user_0d_1' in MySQL server
-CREATE USER IF NOT EXISTS 'user_0d_1'@'localhost' IDENTIFIED BY 'user_0d_1_pwd';
-GRANT ALL PRIVILEGES ON *.* TO 'user_0d_1'@'localhost' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
+-- Generate table with mandatory ID
+-- Ensures 'id_not_null' table's creation on MySQL
+CREATE TABLE IF NOT EXISTS id_not_null (
+    id INT NOT NULL DEFAULT 1,
+    name VARCHAR(256)
+);
+-- Display MySQL users' rights
+-- Enumerates 'user_0d_1' and 'user_0d_2' privileges
+SHOW GRANTS FOR 'user_0d_1'@'localhost';
+SHOW GRANTS FOR 'user_0d_2'@'localhost';
