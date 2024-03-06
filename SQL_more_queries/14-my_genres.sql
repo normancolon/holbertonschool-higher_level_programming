@@ -1,6 +1,13 @@
-SELECT genres.name
-FROM tv_shows
-JOIN tv_show_genres ON tv_shows.id = tv_show_genres.show_id
-JOIN genres ON tv_show_genres.genre_id = genres.id
-WHERE tv_shows.title = 'Dexter'
-ORDER BY genres.name ASC;
+-- Lists genres and the count of associated TV shows
+SELECT 
+    tv_genres.name AS genre, 
+    COUNT(tv_show_genres.genre_id) AS number_of_shows -- Joins tv_genres with tv_show_genres and counts shows per genre
+FROM 
+    tv_show_genres
+JOIN 
+    tv_genres ON tv_genres.id = tv_show_genres.genre_id
+GROUP BY 
+    tv_genres.id
+ORDER BY 
+    number_of_shows DESC, 
+    tv_genres.id ASC;

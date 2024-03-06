@@ -1,5 +1,5 @@
--- Create the table unique_id if it does not exist
-CREATE TABLE IF NOT EXISTS unique_id (
-    id INT NOT NULL DEFAULT 1 UNIQUE,
+CREATE TABLE IF NOT EXISTS id_not_null (
+    id INT NOT NULL DEFAULT 1,
     name VARCHAR(256)
 );
+
