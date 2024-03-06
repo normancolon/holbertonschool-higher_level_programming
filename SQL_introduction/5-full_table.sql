@@ -1,1 +1,2 @@
--- Placeholder content for 5-full_table.sql
+-- Print the creation statement of first_table
+SHOW CREATE TABLE first_table;

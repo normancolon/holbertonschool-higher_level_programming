@@ -1,1 +1,2 @@
--- Placeholder content for 0-list_databases.sql
+-- List all databases on the MySQL server
+SHOW DATABASES;
