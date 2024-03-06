@@ -1,11 +1,11 @@
--- Lists all cities in California from the database
+-- Lists all cities along with their corresponding state names
 SELECT 
-    id, 
-    name 
+    cities.id, 
+    cities.name AS city_name, 
+    states.name AS state_name
 FROM 
-    cities 
-WHERE 
-    state_id = (
-        -- Retrieves the ID for the state named 'California'
-        SELECT id FROM states WHERE name = 'California'
-    );
+    cities
+INNER JOIN 
+    states ON cities.state_id = states.id
+ORDER BY 
+    cities.id ASC;

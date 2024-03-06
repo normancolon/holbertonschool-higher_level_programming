@@ -1,10 +1,12 @@
--- Lists all cities along with their state names from the database
+-- Script that lists all TV shows and their genre IDs, if available
 SELECT 
-    cities.id, 
-    cities.name AS city_name, 
-    states.name AS state_name
+    tv_shows.title, 
+    tv_show_genres.genre_id -- Joins tv_shows with tv_show_genres using a LEFT JOIN
 FROM 
-    cities
-INNER JOIN states ON cities.state_id = states.id
+    tv_shows
+LEFT JOIN 
+    tv_show_genres ON tv_shows.id = tv_show_genres.show_id
 ORDER BY 
-    cities.name, states.name;
+    tv_shows.title, 
+    tv_show_genres.genre_id;
+

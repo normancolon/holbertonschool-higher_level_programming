@@ -1,13 +1,14 @@
--- Lists genres associated with the show 'Dexter'
+-- Script that lists all TV shows classified as 'Comedy'
 SELECT 
-    tv_genres.name -- Selects genre names
+    tv_shows.title -- Selects show titles
 FROM 
-    tv_genres
+    tv_shows
 JOIN 
-    tv_show_genres ON tv_genres.id = tv_show_genres.genre_id
+    tv_show_genres ON tv_show_genres.show_id = tv_shows.id
 JOIN 
-    tv_shows ON tv_show_genres.show_id = tv_shows.id
+    tv_genres ON tv_genres.id = tv_show_genres.genre_id
 WHERE 
-    tv_shows.title = 'Dexter'
+    tv_genres.name = 'Comedy'
 ORDER BY 
-    tv_genres.name ASC;
+    tv_shows.title ASC;
+

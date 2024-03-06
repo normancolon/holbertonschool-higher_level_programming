@@ -1,11 +1,11 @@
--- Lists all cities in California from the database
+-- Script that lists all TV shows and their associated genre IDs
 SELECT 
-    id, 
-    name 
+    tv_shows.title, 
+    tv_show_genres.genre_id -- Joins tv_shows with tv_show_genres
 FROM 
-    cities 
-WHERE 
-    state_id = (
-        -- Retrieves the ID for the state named 'California'
-        SELECT id FROM states WHERE name = 'California'
-    );
+    tv_shows
+JOIN 
+    tv_show_genres ON tv_shows.id = tv_show_genres.show_id
+ORDER BY 
+    tv_shows.title, 
+    tv_show_genres.genre_id;
