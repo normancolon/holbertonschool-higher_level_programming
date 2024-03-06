@@ -1,0 +1,1 @@
+-- Placeholder content for 16-no_link.sql

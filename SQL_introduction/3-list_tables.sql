@@ -1,0 +1,1 @@
+-- Placeholder content for 3-list_tables.sql

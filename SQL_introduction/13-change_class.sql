@@ -1,0 +1,1 @@
+-- Placeholder content for 13-change_class.sql

@@ -1,0 +1,1 @@
+-- Placeholder content for 14-average.sql

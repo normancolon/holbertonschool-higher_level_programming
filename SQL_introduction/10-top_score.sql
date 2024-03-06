@@ -1,0 +1,1 @@
+-- Placeholder content for 10-top_score.sql

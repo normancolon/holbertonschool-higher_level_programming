@@ -1,0 +1,1 @@
+-- Placeholder content for 7-insert_value.sql

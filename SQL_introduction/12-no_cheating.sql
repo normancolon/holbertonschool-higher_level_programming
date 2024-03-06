@@ -1,0 +1,1 @@
+-- Placeholder content for 12-no_cheating.sql
