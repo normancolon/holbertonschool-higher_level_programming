@@ -1,4 +1,3 @@
-
 # Python MySQL and SQLAlchemy Project Files
 
 This repository contains a series of Python scripts that interact with a MySQL database, some using the MySQLdb module and others using SQLAlchemy ORM. Here's a brief overview of each file:
